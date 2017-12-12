@@ -1,9 +1,9 @@
-package com.example.leonardo.udacitypopularmovies.api;
+package com.example.leonardo.popularmovies.api;
 
 
-import com.example.leonardo.udacitypopularmovies.entity.Movie;
-import com.example.leonardo.udacitypopularmovies.entity.MoviePaginatedResult;
-import com.example.leonardo.udacitypopularmovies.enums.ImageSize;
+import com.example.leonardo.popularmovies.entity.Movie;
+import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
+import com.example.leonardo.popularmovies.enums.ImageSize;
 
 /**
  * Created by leonardo on 07/12/17.

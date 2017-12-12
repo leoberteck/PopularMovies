@@ -1,10 +1,10 @@
-package com.example.leonardo.udacitypopularmovies.api;
+package com.example.leonardo.popularmovies.api;
 
 import android.net.Uri;
 
-import com.example.leonardo.udacitypopularmovies.entity.Movie;
-import com.example.leonardo.udacitypopularmovies.entity.MoviePaginatedResult;
-import com.example.leonardo.udacitypopularmovies.enums.ImageSize;
+import com.example.leonardo.popularmovies.entity.Movie;
+import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
+import com.example.leonardo.popularmovies.enums.ImageSize;
 
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -58,7 +58,7 @@ public class MovieApi implements MovieAPIInterface {
         return restTemplate.getForObject(
             getMovieApiBaseUriBuilder()
                 .appendPath(path)
-                .appendQueryParameter("apy_key", apiKey)
+                .appendQueryParameter("api_key", apiKey)
                 .appendQueryParameter("language", locale)
                 .appendQueryParameter("page", String.valueOf(page))
                 .build()

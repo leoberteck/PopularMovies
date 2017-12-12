@@ -1,8 +1,8 @@
-package com.example.leonardo.udacitypopularmovies.utils;
+package com.example.leonardo.popularmovies.utils;
 
 import android.content.SharedPreferences;
 
-import com.example.leonardo.udacitypopularmovies.enums.MovieSort;
+import com.example.leonardo.popularmovies.enums.MovieSort;
 
 public final class Preferences {
 

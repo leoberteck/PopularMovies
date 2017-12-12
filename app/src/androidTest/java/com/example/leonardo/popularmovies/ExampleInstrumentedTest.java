@@ -1,4 +1,4 @@
-package com.example.leonardo.udacitypopularmovies;
+package com.example.leonardo.popularmovies;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

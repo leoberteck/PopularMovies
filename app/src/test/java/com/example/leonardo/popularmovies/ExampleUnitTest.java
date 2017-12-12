@@ -1,4 +1,4 @@
-package com.example.leonardo.udacitypopularmovies;
+package com.example.leonardo.popularmovies;
 
 import org.junit.Test;
 

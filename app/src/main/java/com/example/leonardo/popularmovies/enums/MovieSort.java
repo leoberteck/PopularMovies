@@ -1,4 +1,4 @@
-package com.example.leonardo.udacitypopularmovies.enums;
+package com.example.leonardo.popularmovies.enums;
 
 
 public enum MovieSort {

@@ -1,4 +1,4 @@
-package com.example.leonardo.udacitypopularmovies.entity;
+package com.example.leonardo.popularmovies.entity;
 
 import java.util.Date;
 

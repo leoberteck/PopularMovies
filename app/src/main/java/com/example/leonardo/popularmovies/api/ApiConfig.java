@@ -1,8 +1,8 @@
-package com.example.leonardo.udacitypopularmovies.api;
+package com.example.leonardo.popularmovies.api;
 
 
-import com.example.leonardo.udacitypopularmovies.App;
-import com.example.leonardo.udacitypopularmovies.R;
+import com.example.leonardo.popularmovies.App;
+import com.example.leonardo.popularmovies.R;
 
 public final class ApiConfig {
 
