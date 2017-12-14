@@ -8,14 +8,18 @@ import android.util.Log;
 import com.example.leonardo.popularmovies.BR;
 import com.example.leonardo.popularmovies.adapters.MovieGridAdapter;
 import com.example.leonardo.popularmovies.api.MovieAPIInterface;
+import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.MovieSort;
 
+import static com.example.leonardo.popularmovies.mvp.MovieListMvp.*;
 
-public class MovieListPresenter extends BaseObservable implements MovieListMvp.MovieListPresenterInterface {
+
+public class MovieListPresenter extends BaseObservable implements MovieListPresenterInterface, MovieGridAdapter.ItemClickListener {
 
     private MovieGridAdapter adapter;
     private MovieAPIInterface movieApi;
+    private MovieListActivityInterface movieListActivityInterface;
 
     public MovieListPresenter(MovieAPIInterface movieApi) {
         this.movieApi = movieApi;
@@ -34,7 +38,7 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
 
     @Override
     public void changeSort(MovieSort movieSort, String locale){
-        setAdapter(new MovieGridAdapter(movieApi, movieSort, locale));
+        setAdapter(new MovieGridAdapter(movieApi, movieSort, locale, this));
         loadNextPage();
     }
 
@@ -47,6 +51,16 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
                 , getAdapter().getLocale()
             );
         }
+    }
+
+    @Override
+    public void onItemClick(Movie movie) {
+        movieListActivityInterface.onMovieClick(movie.getId());
+    }
+
+    @Override
+    public void setMovieListActivityInterface(MovieListActivityInterface movieListActivityInterface) {
+        this.movieListActivityInterface = movieListActivityInterface;
     }
 
     private static class MovieQueryTask extends AsyncTask<Object, Void, MoviePaginatedResult> {
@@ -74,6 +88,9 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
                     break;
                 case NOW_PLAYING:
                     result = movieApi.listNowPlayng(page, locale);
+                    break;
+                case POPULAR:
+                    result = movieApi.listPopular(page, locale);
                     break;
             }
             return result;

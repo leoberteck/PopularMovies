@@ -60,6 +60,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.setMovieListActivityInterface(this);
         MovieSort movieSort = preferences.getMovieSort();
         if(getAdapter().getMovieSort() != movieSort){
             presenter.changeSort(movieSort, getCurrentLocale(this).getLanguage());
@@ -82,6 +83,12 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMovieClick(long id) {
+        Intent intent = new Intent(MovieListActivity.this, MovieDetailActivity.class);
+        startActivity(intent);
     }
 
     private Locale getCurrentLocale(Context context){

@@ -4,7 +4,8 @@ package com.example.leonardo.popularmovies.enums;
 public enum MovieSort {
     TOP_RATED(1)
     , UPCOMING(2)
-    , NOW_PLAYING(3);
+    , NOW_PLAYING(3)
+    , POPULAR(4);
 
     private int value;
 
@@ -29,6 +30,8 @@ public enum MovieSort {
             case 3:
                 sort = NOW_PLAYING;
                 break;
+            case 4:
+                sort = POPULAR;
         }
         return sort;
     }

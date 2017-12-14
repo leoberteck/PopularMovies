@@ -21,11 +21,13 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
     private MovieAPIInterface movieApi;
     private MovieSort movieSort;
     private String locale;
+    private ItemClickListener itemClickListener;
 
-    public MovieGridAdapter(MovieAPIInterface movieApi, MovieSort movieSort, String locale) {
+    public MovieGridAdapter(MovieAPIInterface movieApi, MovieSort movieSort, String locale, ItemClickListener itemClickListener) {
         this.movieApi = movieApi;
         this.movieSort = movieSort;
         this.locale = locale;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -37,12 +39,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Movie movie = dataSet.get(position);
-        holder.getTextView().setText(movie.getTitle());
-        Picasso
-            .with(holder.getContext())
-            .load(movieApi.getImageUrl(movie.getPosterPath(), ImageSize.W185))
-            .into(holder.getImageView());
+        holder.bind(dataSet.get(position));
     }
 
     @Override
@@ -76,29 +73,51 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
         return locale;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public interface ItemClickListener{
+        void onItemClick(Movie movie);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Context context;
         private ImageView imageView;
         private TextView textView;
+        private Movie movie;
 
         ViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
             imageView = itemView.findViewById(R.id.image_view_movie_poster);
             textView = itemView.findViewById(R.id.textView_movie_title);
+            itemView.setOnClickListener(this);
         }
 
-        public Context getContext() {
+        Context getContext() {
             return context;
         }
 
-        public ImageView getImageView() {
+        ImageView getImageView() {
             return imageView;
         }
 
-        public TextView getTextView() {
+        TextView getTextView() {
             return textView;
+        }
+
+        void bind(Movie movie){
+            this.movie = movie;
+            getTextView().setText(movie.getTitle());
+            Picasso
+                .with(getContext())
+                .load(movieApi.getImageUrl(movie.getPosterPath(), ImageSize.W185))
+                .into(getImageView());
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(itemClickListener != null){
+                itemClickListener.onItemClick(movie);
+            }
         }
     }
 }

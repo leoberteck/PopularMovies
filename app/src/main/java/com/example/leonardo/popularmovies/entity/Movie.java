@@ -12,6 +12,8 @@ import java.util.Date;
 public class Movie {
     private long id;
     private String title;
+    @SerializedName("original_title")
+    private String originalTitle;
     @SerializedName("poster_path")
     private String posterPath;
     @SerializedName("original_language")
@@ -19,6 +21,9 @@ public class Movie {
     private String overview;
     @SerializedName("release_date")
     private Date releaseDate;
+    private int runtime;
+    @SerializedName("vote_averag")
+    private double voteAverage;
 
     public long getId() {
         return id;
@@ -66,6 +71,30 @@ public class Movie {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     @Override

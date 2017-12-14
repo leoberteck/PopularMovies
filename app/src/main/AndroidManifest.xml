@@ -19,8 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingsActivity"
-            android:parentActivityName=".activity.MovieListActivity" >
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:parentActivityName=".activity.MovieListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MovieListActivity" />
+        </activity>
+        <activity
+            android:name=".activity.MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.MovieListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MovieListActivity" />

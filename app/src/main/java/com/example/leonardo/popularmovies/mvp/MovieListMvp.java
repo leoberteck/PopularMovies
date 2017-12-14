@@ -12,6 +12,7 @@ import com.example.leonardo.popularmovies.enums.MovieSort;
 public interface MovieListMvp {
     interface MovieListActivityInterface{
 
+        void onMovieClick(long id);
     }
 
     @BindingMethods(value = {
@@ -22,5 +23,7 @@ public interface MovieListMvp {
         MovieGridAdapter getAdapter();
         void changeSort(MovieSort sort, String locale);
         void loadNextPage();
+
+        void setMovieListActivityInterface(MovieListActivityInterface movieListActivityInterface);
     }
 }

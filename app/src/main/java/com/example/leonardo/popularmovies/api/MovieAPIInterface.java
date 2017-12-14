@@ -16,6 +16,9 @@ public interface MovieAPIInterface {
     MoviePaginatedResult listNowPlayng(int page, String locale);
     MoviePaginatedResult listUpcoming(int page, String locale);
     MoviePaginatedResult listTopRated(int page, String locale);
+
+    MoviePaginatedResult listPopular(int page, String locale);
+
     Movie getDetails(int id, String locale);
     String getImageUrl(String imageId, ImageSize imageSize);
 }

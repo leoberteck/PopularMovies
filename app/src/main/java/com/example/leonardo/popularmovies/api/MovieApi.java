@@ -5,8 +5,6 @@ import android.net.Uri;
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.ImageSize;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.GsonBuilder;
 
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -33,6 +31,11 @@ public class MovieApi implements MovieAPIInterface {
     @Override
     public MoviePaginatedResult listTopRated(int page, String locale) {
         return getPaginatedResult("top_rated", page, locale);
+    }
+
+    @Override
+    public MoviePaginatedResult listPopular(int page, String locale) {
+        return getPaginatedResult("popular", page, locale);
     }
 
     @Override
