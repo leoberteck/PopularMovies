@@ -2,10 +2,8 @@ package com.example.leonardo.popularmovies.mvp;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingMethod;
-import android.databinding.BindingMethods;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.leonardo.popularmovies.BR;
 import com.example.leonardo.popularmovies.adapters.MovieGridAdapter;
@@ -13,9 +11,7 @@ import com.example.leonardo.popularmovies.api.MovieAPIInterface;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.MovieSort;
 
-@BindingMethods(value = {
-    @BindingMethod(type = RecyclerView.class, attribute = "android:adapter", method = "setAdapter")
-})
+
 public class MovieListPresenter extends BaseObservable implements MovieListMvp.MovieListPresenterInterface {
 
     private MovieGridAdapter adapter;
@@ -33,7 +29,7 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
 
     public void setAdapter(MovieGridAdapter adapter) {
         this.adapter = adapter;
-        notifyPropertyChanged(BR._all);
+        notifyPropertyChanged(BR.adapter);
     }
 
     @Override
@@ -44,14 +40,17 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
 
     @Override
     public void loadNextPage(){
-        new MovieQueryTask(this, movieApi).run(
-            getAdapter().getMovieSort()
-            , getAdapter().getCurrentPage() + 1
-            , getAdapter().getLocale()
-        );
+        if(getAdapter().getCurrentPage() < getAdapter().getTotalPages() || getAdapter().getCurrentPage() == 0){
+            new MovieQueryTask(this, movieApi).run(
+                getAdapter().getMovieSort()
+                , getAdapter().getCurrentPage() + 1
+                , getAdapter().getLocale()
+            );
+        }
     }
 
     private static class MovieQueryTask extends AsyncTask<Object, Void, MoviePaginatedResult> {
+        private static final String TAG = MovieQueryTask.class.getSimpleName();
         private MovieListPresenter caller;
         MovieAPIInterface movieApi;
 
@@ -88,6 +87,7 @@ public class MovieListPresenter extends BaseObservable implements MovieListMvp.M
 
         protected void run(MovieSort movieSort, int page, String locale){
             execute(movieSort, page, locale);
+            Log.i(TAG, "Loading page : " + page + " from " + movieSort.toString());
         }
     }
 }

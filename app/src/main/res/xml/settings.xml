@@ -1,0 +1,17 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:key="main_page_settings"
+        android:title="@string/main_page_preferences_title">
+
+        <ListPreference
+            android:key="@string/movie_sort_key"
+            android:summary="@string/movie_sort_preference_summary"
+            android:title="@string/movie_sort_preference_title"
+            android:entries="@array/movie_sort_values_descripton"
+            android:entryValues="@array/movie_sort_values" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.leonardo.popularmovies.R;
 import com.example.leonardo.popularmovies.api.MovieAPIInterface;
@@ -37,6 +38,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = dataSet.get(position);
+        holder.getTextView().setText(movie.getTitle());
         Picasso
             .with(holder.getContext())
             .load(movieApi.getImageUrl(movie.getPosterPath(), ImageSize.W185))
@@ -45,20 +47,25 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataSet != null ? dataSet.size() : 0;
     }
 
     public void addPage(MoviePaginatedResult movies) {
         if(dataSet == null){
             dataSet = movies;
-            return;
+        } else if(dataSet.getPage() < movies.getPage()){
+            dataSet.addAll(movies.getResults());
+            dataSet.setPage(movies.getPage());
         }
-        dataSet.addAll(movies.getResults());
-        dataSet.setPage(movies.getPage());
+        notifyDataSetChanged();
     }
 
     public int getCurrentPage(){
         return dataSet != null ? dataSet.getPage() : 0;
+    }
+
+    public int getTotalPages(){
+        return dataSet != null ? dataSet.getTotalPages() : 0;
     }
 
     public MovieSort getMovieSort() {
@@ -73,11 +80,13 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
 
         private Context context;
         private ImageView imageView;
+        private TextView textView;
 
         ViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
             imageView = itemView.findViewById(R.id.image_view_movie_poster);
+            textView = itemView.findViewById(R.id.textView_movie_title);
         }
 
         public Context getContext() {
@@ -86,6 +95,10 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
 
         public ImageView getImageView() {
             return imageView;
+        }
+
+        public TextView getTextView() {
+            return textView;
         }
     }
 }

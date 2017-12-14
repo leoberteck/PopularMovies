@@ -5,6 +5,8 @@ import android.net.Uri;
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.ImageSize;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.GsonBuilder;
 
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -49,7 +51,7 @@ public class MovieApi implements MovieAPIInterface {
     public String getImageUrl(String imageId, ImageSize imageSize) {
         return getImageApiBaseUriBuilder()
             .appendPath(imageSize.getValue())
-            .appendPath(imageId)
+            .appendEncodedPath(imageId)
             .build()
             .toString();
     }

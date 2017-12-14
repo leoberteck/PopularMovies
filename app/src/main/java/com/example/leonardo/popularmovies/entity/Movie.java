@@ -1,5 +1,7 @@
 package com.example.leonardo.popularmovies.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -8,11 +10,23 @@ import java.util.Date;
  */
 
 public class Movie {
+    private long id;
     private String title;
+    @SerializedName("poster_path")
     private String posterPath;
+    @SerializedName("original_language")
     private String originalLanguage;
     private String overview;
+    @SerializedName("release_date")
     private Date releaseDate;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -53,4 +67,23 @@ public class Movie {
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        if (getId() != movie.getId()) return false;
+        return getTitle().equals(movie.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getTitle().hashCode();
+        return result;
+    }
 }
+
