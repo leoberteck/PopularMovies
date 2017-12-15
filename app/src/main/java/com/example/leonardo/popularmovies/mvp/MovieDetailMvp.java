@@ -5,7 +5,7 @@ import android.databinding.Observable;
 
 public interface MovieDetailMvp {
 
-    interface MovieDetailActivityInterface {
+    interface MovieDetailActivityInterface extends BaseActivityInterface{
         void loadMoviePoster(String uri);
     }
 

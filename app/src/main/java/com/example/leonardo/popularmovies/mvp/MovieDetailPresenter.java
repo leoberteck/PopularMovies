@@ -62,16 +62,7 @@ public class MovieDetailPresenter extends BaseObservable implements MovieDetailM
 
     @Override
     public void setMovie(long movieId, String locale) {
-        new FindMovieTask(new FindMovieTask.OnTaskFinishListener() {
-            @Override
-            public void onTaskFinish(@Nullable Movie movie) {
-                MovieDetailPresenter.this.movie = movie;
-                notifyPropertyChanged(BR._all);
-                if(movieDetailActivity != null){
-                    movieDetailActivity.loadMoviePoster(movieAPIInterface.getImageUrl(movie.getPosterPath(), ImageSize.W500));
-                }
-            }
-        }, movieAPIInterface).run(movieId, locale);
+        new FindMovieTask(this, movieAPIInterface).run(movieId, locale);
     }
 
     @Override
@@ -79,15 +70,24 @@ public class MovieDetailPresenter extends BaseObservable implements MovieDetailM
         this.movieDetailActivity = movieDetailActivity;
     }
 
+    private void onMovieLoadFinish(@Nullable Movie movie){
+        MovieDetailPresenter.this.movie = movie;
+        notifyPropertyChanged(BR._all);
+        if(movieDetailActivity != null){
+            movieDetailActivity.loadMoviePoster(movieAPIInterface.getImageUrl(movie.getPosterPath(), ImageSize.W500));
+        }
+    }
+
     private static class FindMovieTask extends AsyncTask<Object, Void, Movie>{
 
         @NonNull
-        private OnTaskFinishListener listener;
+        private MovieDetailPresenter caller;
         @NonNull
         private MovieAPIInterface movieAPIInterface;
+        private Exception e;
 
-        FindMovieTask(@NonNull OnTaskFinishListener listener, @NonNull MovieAPIInterface movieAPIInterface) {
-            this.listener = listener;
+        FindMovieTask(MovieDetailPresenter caller, @NonNull MovieAPIInterface movieAPIInterface) {
+            this.caller = caller;
             this.movieAPIInterface = movieAPIInterface;
         }
 
@@ -95,21 +95,27 @@ public class MovieDetailPresenter extends BaseObservable implements MovieDetailM
         protected Movie doInBackground(Object... objects) {
             long id = (long) objects[0];
             String locale = (String) objects[1];
-            return movieAPIInterface.getDetails(id, locale);
+            Movie result = null;
+            try {
+                result = movieAPIInterface.getDetails(id, locale);
+            }catch (Exception e){
+                this.e = e;
+            }
+            return result;
         }
 
         @Override
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
-            listener.onTaskFinish(movie);
+            if(e != null){
+                caller.movieDetailActivity.showErrorMessage(R.string.error, R.string.api_error_message, e);
+            }else{
+                caller.onMovieLoadFinish(movie);
+            }
         }
 
         void run(long id, String locale){
             execute(id, locale);
-        }
-
-        interface OnTaskFinishListener{
-            void onTaskFinish(@Nullable Movie movie);
         }
     }
 }

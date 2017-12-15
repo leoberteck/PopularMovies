@@ -10,7 +10,7 @@ import com.example.leonardo.popularmovies.adapters.MovieGridAdapter;
 import com.example.leonardo.popularmovies.enums.MovieSort;
 
 public interface MovieListMvp {
-    interface MovieListActivityInterface{
+    interface MovieListActivityInterface extends BaseActivityInterface{
 
         void onMovieClick(long id);
     }

@@ -6,13 +6,15 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.leonardo.popularmovies.BR;
+import com.example.leonardo.popularmovies.R;
 import com.example.leonardo.popularmovies.adapters.MovieGridAdapter;
 import com.example.leonardo.popularmovies.api.MovieAPIInterface;
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.MovieSort;
 
-import static com.example.leonardo.popularmovies.mvp.MovieListMvp.*;
+import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListActivityInterface;
+import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListPresenterInterface;
 
 
 public class MovieListPresenter extends BaseObservable implements MovieListPresenterInterface, MovieGridAdapter.ItemClickListener {
@@ -68,6 +70,8 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
         private MovieListPresenter caller;
         MovieAPIInterface movieApi;
 
+        private Exception e;
+
         MovieQueryTask(MovieListPresenter caller, MovieAPIInterface movieApi) {
             this.caller = caller;
             this.movieApi = movieApi;
@@ -79,19 +83,23 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
             int page = (int) objects[1];
             String locale = (String) objects[2];
             MoviePaginatedResult result = null;
-            switch (movieSort){
-                case UPCOMING:
-                    result = movieApi.listUpcoming(page, locale);
-                    break;
-                case TOP_RATED:
-                    result = movieApi.listTopRated(page, locale);
-                    break;
-                case NOW_PLAYING:
-                    result = movieApi.listNowPlayng(page, locale);
-                    break;
-                case POPULAR:
-                    result = movieApi.listPopular(page, locale);
-                    break;
+            try{
+                switch (movieSort){
+                    case UPCOMING:
+                        result = movieApi.listUpcoming(page, locale);
+                        break;
+                    case TOP_RATED:
+                        result = movieApi.listTopRated(page, locale);
+                        break;
+                    case NOW_PLAYING:
+                        result = movieApi.listNowPlayng(page, locale);
+                        break;
+                    case POPULAR:
+                        result = movieApi.listPopular(page, locale);
+                        break;
+                }
+            }catch (Exception e){
+                this.e = e;
             }
             return result;
         }
@@ -99,7 +107,11 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
         @Override
         protected void onPostExecute(MoviePaginatedResult movies) {
             super.onPostExecute(movies);
-            caller.getAdapter().addPage(movies);
+            if(e != null){
+                caller.movieListActivityInterface.showErrorMessage(R.string.error, R.string.api_error_message, e);
+            }else{
+                caller.getAdapter().addPage(movies);
+            }
         }
 
         protected void run(MovieSort movieSort, int page, String locale){

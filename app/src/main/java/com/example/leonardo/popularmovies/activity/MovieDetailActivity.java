@@ -1,13 +1,10 @@
 package com.example.leonardo.popularmovies.activity;
 
 import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
@@ -19,9 +16,7 @@ import com.example.leonardo.popularmovies.mvp.MovieDetailPresenter;
 import com.example.leonardo.popularmovies.utils.ResourceUtils;
 import com.squareup.picasso.Picasso;
 
-import java.util.Locale;
-
-public class MovieDetailActivity extends AppCompatActivity implements MovieDetailMvp.MovieDetailActivityInterface {
+public class MovieDetailActivity extends BaseAppCompatActivity implements MovieDetailMvp.MovieDetailActivityInterface {
 
     public static final String MOVIE_ID_EXTRA_KEY = "MOVIE_ID";
     private MovieDetailMvp.MovieDetailPresenterInterface presenter;
@@ -63,17 +58,5 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         Picasso.with(this)
             .load(uri)
             .into(imageViewMoviePoster);
-    }
-
-    private Locale getCurrentLocale(Context context){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            return context.getResources().getConfiguration().getLocales().get(0);
-        } else{
-            return context.getResources().getConfiguration().locale;
-        }
-    }
-
-    private String getCurrentLanguage(){
-        return getCurrentLocale(this).getLanguage();
     }
 }

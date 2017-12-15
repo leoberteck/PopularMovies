@@ -40,18 +40,14 @@ public class MovieApi implements MovieAPIInterface {
 
     @Override
     public Movie getDetails(long id, String locale) {
-        try {
-            return restTemplate.getForObject(
-                    getMovieApiBaseUriBuilder()
-                            .appendPath(String.valueOf(id))
-                            .appendQueryParameter("api_key", apiKey)
-                            .appendQueryParameter("language", locale)
-                            .build()
-                            .toString()
-                    , Movie.class);
-        } catch (Exception e){
-            return null;
-        }
+        return restTemplate.getForObject(
+            getMovieApiBaseUriBuilder()
+                    .appendPath(String.valueOf(id))
+                    .appendQueryParameter("api_key", apiKey)
+                    .appendQueryParameter("language", locale)
+                    .build()
+                    .toString()
+            , Movie.class);
     }
 
     @Override
@@ -64,19 +60,15 @@ public class MovieApi implements MovieAPIInterface {
     }
 
     private MoviePaginatedResult getPaginatedResult(String path, int page, String locale){
-        try {
-            return restTemplate.getForObject(
-                    getMovieApiBaseUriBuilder()
-                            .appendPath(path)
-                            .appendQueryParameter("api_key", apiKey)
-                            .appendQueryParameter("language", locale)
-                            .appendQueryParameter("page", String.valueOf(page))
-                            .build()
-                            .toString()
-                    , MoviePaginatedResult.class);
-        }catch (Exception e){
-            return null;
-        }
+        return restTemplate.getForObject(
+            getMovieApiBaseUriBuilder()
+                .appendPath(path)
+                .appendQueryParameter("api_key", apiKey)
+                .appendQueryParameter("language", locale)
+                .appendQueryParameter("page", String.valueOf(page))
+                .build()
+                .toString()
+            , MoviePaginatedResult.class);
     }
 
     private Uri.Builder getImageApiBaseUriBuilder(){

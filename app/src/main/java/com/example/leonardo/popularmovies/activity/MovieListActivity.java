@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,9 +22,7 @@ import com.example.leonardo.popularmovies.mvp.MovieListPresenter;
 import com.example.leonardo.popularmovies.utils.Preferences;
 import com.example.leonardo.popularmovies.utils.ResourceUtils;
 
-import java.util.Locale;
-
-public class MovieListActivity extends AppCompatActivity implements MovieListMvp.MovieListActivityInterface {
+public class MovieListActivity extends BaseAppCompatActivity implements MovieListMvp.MovieListActivityInterface {
 
     private static final String TAG = MovieListActivity.class.getSimpleName();
     private static MovieListMvp.MovieListPresenterInterface presenter;
@@ -92,14 +88,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
         startActivity(intent);
     }
 
-    private Locale getCurrentLocale(Context context){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            return context.getResources().getConfiguration().getLocales().get(0);
-        } else{
-            return context.getResources().getConfiguration().locale;
-        }
-    }
-
     private int getOptimalNumberOfColumns(Context context){
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
@@ -129,9 +117,5 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
             movieSortDescriptionArray = resourceUtils.getStringArray(R.array.movie_sort_values_descripton);
         }
         return movieSortDescriptionArray;
-    }
-
-    private String getCurrentLanguage(){
-        return getCurrentLocale(this).getLanguage();
     }
 }
