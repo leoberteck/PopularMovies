@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="movie_sort_key">movie_sort_key</string>
+    <string name="movie_sort_key" translatable="false">movie_sort_key</string>
     <string-array name="movie_sort_values">
         <item>1</item>
         <item>2</item>

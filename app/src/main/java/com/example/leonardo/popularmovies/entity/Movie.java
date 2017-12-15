@@ -22,7 +22,7 @@ public class Movie {
     @SerializedName("release_date")
     private Date releaseDate;
     private int runtime;
-    @SerializedName("vote_averag")
+    @SerializedName("vote_average")
     private double voteAverage;
 
     public long getId() {

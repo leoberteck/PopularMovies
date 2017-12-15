@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Filmes populares</string>
+    <string name="movie_poster">Cartaz</string>
+    <string name="settings">Configurações</string>
+
+    <string name="action_settings">Configurações</string>
+
+    <string name="main_page_preferences_title">Configurações da página principal</string>
+    <string name="movie_sort_preference_summary">Determina como carregar os filmes na página principal</string>
+    <string name="movie_sort_preference_title">Ordenação dos filmes   </string>
+
+    <string-array name="movie_sort_values_descripton">
+        <item>Mais bem avaliados</item>
+        <item>A serem lançados</item>
+        <item>Nos cinemas</item>
+        <item>Mais populares</item>
+    </string-array>
+    <string name="release_date">Data de lançamento</string>
+    <string name="duration">Duração</string>
+    <string name="score">Avaliação</string>
+    <string name="original_title">Título original</string>
+    <string name="overview">Resumo</string>
+    <string name="minutes_abreviated">min</string>
+</resources>

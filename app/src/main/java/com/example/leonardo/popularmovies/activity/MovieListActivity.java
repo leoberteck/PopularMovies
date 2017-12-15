@@ -88,6 +88,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
     @Override
     public void onMovieClick(long id) {
         Intent intent = new Intent(MovieListActivity.this, MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA_KEY, id);
         startActivity(intent);
     }
 

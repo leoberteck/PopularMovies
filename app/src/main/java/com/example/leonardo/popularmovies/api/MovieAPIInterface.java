@@ -19,6 +19,6 @@ public interface MovieAPIInterface {
 
     MoviePaginatedResult listPopular(int page, String locale);
 
-    Movie getDetails(int id, String locale);
+    Movie getDetails(long id, String locale);
     String getImageUrl(String imageId, ImageSize imageSize);
 }
