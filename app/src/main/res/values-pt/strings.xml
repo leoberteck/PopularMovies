@@ -24,6 +24,6 @@
     <string name="minutes_abreviated">min</string>
     <string name="details">Detalhes</string>
     <string name="error">Erro</string>
-    <string name="api_error_message">We could not retrieve data from the internect. Verify your connection.</string>
+    <string name="api_error_message">Não foi possível recuperar dados da rede. Verifique sua conexão.</string>
     <string name="ok">Ok</string>
 </resources>
