@@ -9,7 +9,7 @@ public enum ImageSize {
     , W780("w780")
     , ORIGINAL("original");
 
-    private String value;
+    private final String value;
 
     public String getValue() {
         return value;

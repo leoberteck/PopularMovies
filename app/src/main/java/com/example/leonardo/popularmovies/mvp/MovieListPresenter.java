@@ -3,6 +3,7 @@ package com.example.leonardo.popularmovies.mvp;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.leonardo.popularmovies.BR;
@@ -20,7 +21,7 @@ import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListPrese
 public class MovieListPresenter extends BaseObservable implements MovieListPresenterInterface, MovieGridAdapter.ItemClickListener {
 
     private MovieGridAdapter adapter;
-    private MovieAPIInterface movieApi;
+    private final MovieAPIInterface movieApi;
     private MovieListActivityInterface movieListActivityInterface;
 
     public MovieListPresenter(MovieAPIInterface movieApi) {
@@ -67,12 +68,14 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
 
     private static class MovieQueryTask extends AsyncTask<Object, Void, MoviePaginatedResult> {
         private static final String TAG = MovieQueryTask.class.getSimpleName();
-        private MovieListPresenter caller;
-        MovieAPIInterface movieApi;
+        @NonNull
+        private final MovieListPresenter caller;
+        @NonNull
+        private final MovieAPIInterface movieApi;
 
         private Exception e;
 
-        MovieQueryTask(MovieListPresenter caller, MovieAPIInterface movieApi) {
+        MovieQueryTask(@NonNull MovieListPresenter caller, @NonNull MovieAPIInterface movieApi) {
             this.caller = caller;
             this.movieApi = movieApi;
         }
@@ -114,7 +117,7 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
             }
         }
 
-        protected void run(MovieSort movieSort, int page, String locale){
+        void run(MovieSort movieSort, int page, String locale){
             execute(movieSort, page, locale);
             Log.i(TAG, "Loading page : " + page + " from " + movieSort.toString());
         }

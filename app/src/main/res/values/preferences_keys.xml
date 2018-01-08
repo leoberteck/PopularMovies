@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="movie_sort_key" translatable="false">movie_sort_key</string>
-    <string-array name="movie_sort_values">
+    <string name="app_theme_key" translatable="false">app_theme_key</string>
+    <string-array name="movie_sort_values" translatable="false">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
+    </string-array>
+    <string-array name="app_theme_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 </resources>

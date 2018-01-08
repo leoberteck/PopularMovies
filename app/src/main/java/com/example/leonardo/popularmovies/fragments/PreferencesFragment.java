@@ -12,7 +12,7 @@ import com.example.leonardo.popularmovies.R;
 
 public class PreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -22,12 +22,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Sha
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        loadPreferencesSummary(sharedPreferences);
+        if(getContext() != null){
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            loadPreferencesSummary(sharedPreferences);
+        }
     }
 
     private void loadPreferencesSummary(SharedPreferences sharedPreferences){
         onSharedPreferenceChanged(sharedPreferences, getString(R.string.movie_sort_key));
+        onSharedPreferenceChanged(sharedPreferences, getString(R.string.app_theme_key));
     }
 
     @Override

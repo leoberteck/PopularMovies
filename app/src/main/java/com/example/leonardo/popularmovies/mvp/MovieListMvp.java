@@ -23,7 +23,6 @@ public interface MovieListMvp {
         MovieGridAdapter getAdapter();
         void changeSort(MovieSort sort, String locale);
         void loadNextPage();
-
         void setMovieListActivityInterface(MovieListActivityInterface movieListActivityInterface);
     }
 }

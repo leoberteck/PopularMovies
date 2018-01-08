@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,7 +39,7 @@ public class MovieListActivity extends BaseAppCompatActivity implements MovieLis
             PreferenceManager.getDefaultSharedPreferences(this)
             , resourceUtils
         );
-
+        AppCompatDelegate.setDefaultNightMode(preferences.getAppThemeDayNightMode());
         ViewDataBinding viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_list);
         if(presenter == null){
             presenter = new MovieListPresenter(new MovieApi());
@@ -94,7 +95,7 @@ public class MovieListActivity extends BaseAppCompatActivity implements MovieLis
         return Math.round(dpWidth / 185);
     }
 
-    private RecyclerView.OnScrollListener bottomScrollListener = new RecyclerView.OnScrollListener() {
+    private final RecyclerView.OnScrollListener bottomScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);

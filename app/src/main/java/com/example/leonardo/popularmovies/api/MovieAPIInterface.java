@@ -3,6 +3,8 @@ package com.example.leonardo.popularmovies.api;
 
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
+import com.example.leonardo.popularmovies.entity.ReviewPaginatedResult;
+import com.example.leonardo.popularmovies.entity.TrailerResult;
 import com.example.leonardo.popularmovies.enums.ImageSize;
 
 /**
@@ -19,6 +21,10 @@ public interface MovieAPIInterface {
 
     MoviePaginatedResult listPopular(int page, String locale);
 
+    ReviewPaginatedResult getReviews(long id, int page, String locale);
+
     Movie getDetails(long id, String locale);
     String getImageUrl(String imageId, ImageSize imageSize);
+
+    TrailerResult getTrailers(long id);
 }

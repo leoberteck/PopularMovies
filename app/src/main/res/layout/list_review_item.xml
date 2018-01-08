@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewHolder"
+            type="com.example.leonardo.popularmovies.adapters.MovieReviewAdapter.ViewHolder"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/textViewInitials"
+            style="@style/textPrimaryLarge"
+            android:background="@drawable/bg_circle_medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@{viewHolder.initials}"
+            tools:text="LB" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            style="@style/textPrimary"
+            android:layout_marginStart="@dimen/mediumMargin"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/textViewInitials"
+            android:text="@{viewHolder.author}"
+            tools:text="Leonardo Stabile" />
+
+        <TextView
+            android:id="@+id/textViewContent"
+            android:layout_width="0dp"
+            style="@style/textPrimary"
+            android:text="@{viewHolder.content}"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit tincidunt massa id rutrum. Cras vel odio euismod, pharetra augue a, vehicula purus. Nam imperdiet lectus sed metus sagittis ultricies. Vestibulum id nunc magna. Nam ullamcorper urna id quam fringilla vestibulum. Integer consequat turpis vel arcu volutpat tincidunt. Mauris mauris lacus, vulputate non fermentum a, interdum consequat quam. Proin tempor metus eu luctus cursus. Mauris dapibus ultricies augue et dapibus. Nulla et porttitor ipsum, et porttitor dolor. Proin ex urna, condimentum tempus nunc eu, interdum commodo dolor. Donec in maximus elit. In dignissim in ipsum sed dignissim. Praesent vestibulum arcu a consectetur sagittis."
+            android:layout_marginStart="@dimen/mediumMargin"
+            app:layout_constraintStart_toEndOf="@id/textViewInitials"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewName"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

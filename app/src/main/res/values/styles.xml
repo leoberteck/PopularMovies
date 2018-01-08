@@ -1,10 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceFragment</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorDarkPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="preferenceTheme">@style/PreferenceFragment</item>
     </style>
@@ -17,5 +25,57 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="bigHeaderText" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/mediumMargin</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="smallHeaderText" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="smallHeaderText.Spaced" parent="smallHeaderText">
+        <item name="android:layout_marginStart">@dimen/smallMargin</item>
+        <item name="android:layout_marginEnd">@dimen/smallMargin</item>
+        <item name="android:layout_marginTop">@dimen/smallMargin</item>
+    </style>
+
+    <style name="textPrimary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="textPrimary.Spaced" parent="textPrimary">
+        <item name="android:layout_marginStart">@dimen/smallMargin</item>
+        <item name="android:layout_marginEnd">@dimen/smallMargin</item>
+        <item name="android:layout_marginTop">@dimen/smallMargin</item>
+    </style>
+    
+    <style name="textPrimaryLarge" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="textSecondary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textSecondary.Spaced" parent="textSecondary">
+        <item name="android:layout_marginStart">@dimen/smallMargin</item>
+        <item name="android:layout_marginEnd">@dimen/smallMargin</item>
+        <item name="android:layout_marginTop">@dimen/smallMargin</item>
+    </style>
 
 </resources>

@@ -7,7 +7,7 @@ public enum MovieSort {
     , NOW_PLAYING(3)
     , POPULAR(4);
 
-    private int value;
+    private final int value;
 
     public int getValue() {
         return value;

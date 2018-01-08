@@ -7,4 +7,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">350dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="smallMargin">5dp</dimen>
+    <dimen name="posterSize">300dp</dimen>
+    <dimen name="trailer_width">240dp</dimen>
+    <dimen name="trailer_height">180dp</dimen>
+    <dimen name="mediumMargin">15dp</dimen>
 </resources>

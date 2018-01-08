@@ -18,10 +18,10 @@ import com.squareup.picasso.Picasso;
 
 public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.ViewHolder> {
     private MoviePaginatedResult dataSet;
-    private MovieAPIInterface movieApi;
-    private MovieSort movieSort;
-    private String locale;
-    private ItemClickListener itemClickListener;
+    private final MovieAPIInterface movieApi;
+    private final MovieSort movieSort;
+    private final String locale;
+    private final ItemClickListener itemClickListener;
 
     public MovieGridAdapter(MovieAPIInterface movieApi, MovieSort movieSort, String locale, ItemClickListener itemClickListener) {
         this.movieApi = movieApi;
@@ -51,8 +51,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
         if(dataSet == null){
             dataSet = movies;
         } else if(dataSet.getPage() < movies.getPage()){
-            dataSet.addAll(movies.getResults());
-            dataSet.setPage(movies.getPage());
+            dataSet.addNextPage(movies);
         }
         notifyDataSetChanged();
     }
@@ -79,9 +78,9 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private Context context;
-        private ImageView imageView;
-        private TextView textView;
+        private final Context context;
+        private final ImageView imageView;
+        private final TextView textView;
         private Movie movie;
 
         ViewHolder(View itemView) {

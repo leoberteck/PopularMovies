@@ -2,8 +2,11 @@ package com.example.leonardo.popularmovies.api;
 
 import android.net.Uri;
 
+import com.example.leonardo.popularmovies.entity.AbstractPaginatedResult;
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
+import com.example.leonardo.popularmovies.entity.ReviewPaginatedResult;
+import com.example.leonardo.popularmovies.entity.TrailerResult;
 import com.example.leonardo.popularmovies.enums.ImageSize;
 
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
@@ -20,33 +23,38 @@ public class MovieApi implements MovieAPIInterface {
 
     @Override
     public MoviePaginatedResult listNowPlayng(int page, String locale) {
-        return getPaginatedResult("now_playing", page, locale);
+        return getPaginatedResult("now_playing", page, locale, MoviePaginatedResult.class);
     }
 
     @Override
     public MoviePaginatedResult listUpcoming(int page, String locale) {
-        return getPaginatedResult("upcoming", page, locale);
+        return getPaginatedResult("upcoming", page, locale, MoviePaginatedResult.class);
     }
 
     @Override
     public MoviePaginatedResult listTopRated(int page, String locale) {
-        return getPaginatedResult("top_rated", page, locale);
+        return getPaginatedResult("top_rated", page, locale, MoviePaginatedResult.class);
     }
 
     @Override
     public MoviePaginatedResult listPopular(int page, String locale) {
-        return getPaginatedResult("popular", page, locale);
+        return getPaginatedResult("popular", page, locale, MoviePaginatedResult.class);
+    }
+
+    @Override
+    public ReviewPaginatedResult getReviews(long id, int page, String locale){
+        return getPaginatedResultById(id, "reviews", page, locale, ReviewPaginatedResult.class);
     }
 
     @Override
     public Movie getDetails(long id, String locale) {
         return restTemplate.getForObject(
             getMovieApiBaseUriBuilder()
-                    .appendPath(String.valueOf(id))
-                    .appendQueryParameter("api_key", apiKey)
-                    .appendQueryParameter("language", locale)
-                    .build()
-                    .toString()
+                .appendPath(String.valueOf(id))
+                .appendQueryParameter("api_key", apiKey)
+                .appendQueryParameter("language", locale)
+                .build()
+                .toString()
             , Movie.class);
     }
 
@@ -59,7 +67,22 @@ public class MovieApi implements MovieAPIInterface {
             .toString();
     }
 
-    private MoviePaginatedResult getPaginatedResult(String path, int page, String locale){
+    @Override
+    public TrailerResult getTrailers(long id){
+        return restTemplate.getForObject(
+            getMovieApiBaseUriBuilder()
+                .appendPath(String.valueOf(id))
+                .appendPath("videos")
+                .appendQueryParameter("api_key", apiKey)
+                .build()
+                .toString()
+            , TrailerResult.class
+        );
+    }
+
+    private <T, D extends AbstractPaginatedResult<T>> D getPaginatedResult(
+        String path, int page, String locale, Class<D> dClass)
+    {
         return restTemplate.getForObject(
             getMovieApiBaseUriBuilder()
                 .appendPath(path)
@@ -68,7 +91,22 @@ public class MovieApi implements MovieAPIInterface {
                 .appendQueryParameter("page", String.valueOf(page))
                 .build()
                 .toString()
-            , MoviePaginatedResult.class);
+            , dClass);
+    }
+
+    private <T, D extends AbstractPaginatedResult<T>> D getPaginatedResultById(
+            long id, String path, int page, String locale, Class<D> dClass)
+    {
+        return restTemplate.getForObject(
+            getMovieApiBaseUriBuilder()
+                .appendPath(String.valueOf(id))
+                .appendPath(path)
+                .appendQueryParameter("api_key", apiKey)
+                .appendQueryParameter("language", locale)
+                .appendQueryParameter("page", String.valueOf(page))
+                .build()
+                .toString()
+            , dClass);
     }
 
     private Uri.Builder getImageApiBaseUriBuilder(){

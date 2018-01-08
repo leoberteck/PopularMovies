@@ -25,5 +25,17 @@
     <string name="details">Detalhes</string>
     <string name="error">Erro</string>
     <string name="api_error_message">Não foi possível recuperar dados da rede. Verifique sua conexão.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="app_theme_summary">Escolha entre os temas Escuro ou claro</string>
+    <string name="theme">Tema</string>
+    <string name="dark">Escuro</string>
+    <string name="light">Claro</string>
+    <string name="videos">Videos</string>
+    <string name="reviews">Comentarios</string>
+    <string name="we_could_not_find_any_trailers">Não conseguimos encontrar nenhum trailer</string>
+    <string name="we_could_not_find_any_reviews">Não conseguimos encontrar nenhum comentario</string>
+    <string name="the_movie_poster">Poster do filme</string>
+    <string name="trailer_thumbnail">Imagem do trailer</string>
+    <string name="play_icon">Reproduzir</string>
+    <string name="sad_face">Face triste</string>
 </resources>

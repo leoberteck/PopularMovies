@@ -15,7 +15,13 @@
         <item>Movies now playing</item>
         <item>Most popular</item>
     </string-array>
-    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+
+    <string-array name="app_theme_values_description">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+
+    <string name="title_activity_movie_detail" translatable="false">MovieDetailActivity</string>
     <string name="release_date">Release date</string>
     <string name="duration">Duration</string>
     <string name="score">Score</string>
@@ -25,5 +31,17 @@
     <string name="details">Details</string>
     <string name="error">Erro</string>
     <string name="api_error_message">We could not retrieve data from the internet. Verify your connection.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="app_theme_summary">Select between dark and light themes</string>
+    <string name="theme">Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="videos">Videos</string>
+    <string name="reviews">Reviews</string>
+    <string name="we_could_not_find_any_trailers">We could not find any trailers</string>
+    <string name="we_could_not_find_any_reviews">We could not find any reviews</string>
+    <string name="the_movie_poster">The movie poster</string>
+    <string name="trailer_thumbnail">Trailer thumbnail</string>
+    <string name="play_icon">play icon</string>
+    <string name="sad_face">Sad face</string>
 </resources>

@@ -104,8 +104,7 @@ public class Movie {
 
         Movie movie = (Movie) o;
 
-        if (getId() != movie.getId()) return false;
-        return getTitle().equals(movie.getTitle());
+        return getId() == movie.getId() && getTitle().equals(movie.getTitle());
     }
 
     @Override
