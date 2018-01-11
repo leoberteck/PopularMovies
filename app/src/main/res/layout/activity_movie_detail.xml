@@ -17,24 +17,24 @@
         tools:context="com.example.leonardo.popularmovies.activity.MovieDetailActivity">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
+            android:movieId="@+movieId/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
+                android:movieId="@+movieId/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed"
-                app:toolbarId="@+id/toolbar"
+                app:toolbarId="@+movieId/toolbar"
                 app:statusBarScrim="#000">
 
                 <ImageView
-                    android:id="@+id/image_view_movie_poster"
+                    android:movieId="@+movieId/image_view_movie_poster"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -43,7 +43,7 @@
                     android:contentDescription="@string/the_movie_poster" />
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:movieId="@+movieId/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"

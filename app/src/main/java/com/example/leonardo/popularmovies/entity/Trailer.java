@@ -3,18 +3,18 @@ package com.example.leonardo.popularmovies.entity;
 
 public class Trailer {
 
-    private String id;
+    private String trailerId;
     private String name;
     private String key;
     private String site;
     private String type;
 
-    public String getId() {
-        return id;
+    public String getTrailerId() {
+        return trailerId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTrailerId(String trailerId) {
+        this.trailerId = trailerId;
     }
 
     public String getName() {
@@ -54,11 +54,11 @@ public class Trailer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trailer trailer = (Trailer) o;
-        return getId() != null ? getId().equals(trailer.getId()) : trailer.getId() == null;
+        return getTrailerId() != null ? getTrailerId().equals(trailer.getTrailerId()) : trailer.getTrailerId() == null;
     }
 
     @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        return getTrailerId() != null ? getTrailerId().hashCode() : 0;
     }
 }

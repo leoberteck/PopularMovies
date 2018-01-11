@@ -3,17 +3,17 @@ package com.example.leonardo.popularmovies.entity;
 
 public class Review {
 
-    private String id;
+    private String reviewId;
     private String author;
     private String content;
     private String url;
 
-    public String getId() {
-        return id;
+    public String getReviewId() {
+        return reviewId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
     }
 
     public String getAuthor() {

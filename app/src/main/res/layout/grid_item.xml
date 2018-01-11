@@ -4,11 +4,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/posterSize">
         <TextView
-            android:id="@+id/textView_movie_title"
+            android:movieId="@+movieId/textView_movie_title"
             style="@style/textSecondary"
             android:layout_gravity="center" />
         <ImageView
-            android:id="@+id/image_view_movie_poster"
+            android:movieId="@+movieId/image_view_movie_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"

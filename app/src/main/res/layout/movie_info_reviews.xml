@@ -15,7 +15,7 @@
             android:text="@string/reviews"/>
         <android.support.v7.widget.RecyclerView
             android:visibility="@{presenter.reviewsVisibility}"
-            android:id="@+id/recyclerView_movieReviews"
+            android:movieId="@+movieId/recyclerView_movieReviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"

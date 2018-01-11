@@ -58,7 +58,7 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
 
     @Override
     public void onItemClick(Movie movie) {
-        movieListActivityInterface.onMovieClick(movie.getId());
+        movieListActivityInterface.onMovieClick(movie.getMovieId());
     }
 
     @Override

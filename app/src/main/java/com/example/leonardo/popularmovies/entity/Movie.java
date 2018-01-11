@@ -9,8 +9,8 @@ import java.util.Date;
  * Representation of the movie returned by the themoviedb.org API
  */
 
-public class Movie {
-    private long id;
+public class Movie extends AbstractEntity {
+    private long movieId;
     private String title;
     @SerializedName("original_title")
     private String originalTitle;
@@ -25,12 +25,12 @@ public class Movie {
     @SerializedName("vote_average")
     private double voteAverage;
 
-    public long getId() {
-        return id;
+    public long getMovieId() {
+        return movieId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setMovieId(long movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {
@@ -104,12 +104,12 @@ public class Movie {
 
         Movie movie = (Movie) o;
 
-        return getId() == movie.getId() && getTitle().equals(movie.getTitle());
+        return getMovieId() == movie.getMovieId() && getTitle().equals(movie.getTitle());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = (int) (getMovieId() ^ (getMovieId() >>> 32));
         result = 31 * result + getTitle().hashCode();
         return result;
     }
