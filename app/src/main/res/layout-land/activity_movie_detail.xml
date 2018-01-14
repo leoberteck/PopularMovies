@@ -15,77 +15,88 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.example.leonardo.popularmovies.activity.MovieDetailActivity"
         tools:showIn="@layout/activity_movie_detail">
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                tools:context="com.example.leonardo.popularmovies.activity.MovieDetailActivity"
-                android:padding="@dimen/mediumMargin">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            tools:context="com.example.leonardo.popularmovies.activity.MovieDetailActivity"
+            android:padding="@dimen/mediumMargin">
 
             <TextView
-                android:movieId="@+movieId/textView_movie_title"
+                android:id="@+id/textView_movie_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@{presenter.title}"
                 style="@style/bigHeaderText"/>
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imageResource="@{presenter.favoriteIcon}"
+                android:layout_margin="@dimen/smallMargin"
+                app:fabSize="normal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{() -> presenter.onFavoriteClick()}"/>
+
             <ImageView
-                android:movieId="@+movieId/image_view_movie_poster"
+                android:id="@+id/image_view_movie_poster"
                 android:layout_width="200dp"
                 android:layout_height="400dp"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="@dimen/mediumMargin"
-                app:layout_constraintTop_toBottomOf="@movieId/textView_movie_title"
+                app:layout_constraintTop_toBottomOf="@id/textView_movie_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="@string/the_movie_poster" />
             <include
-                android:movieId="@+movieId/details"
+                android:id="@+id/details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 layout="@layout/movie_info_details"
                 android:layout_marginStart="@dimen/mediumMargin"
                 app:presenter="@{presenter}"
                 android:layout_marginTop="@dimen/mediumMargin"
-                app:layout_constraintStart_toEndOf="@movieId/image_view_movie_poster"
-                app:layout_constraintTop_toBottomOf="@movieId/textView_movie_title"
+                app:layout_constraintStart_toEndOf="@id/image_view_movie_poster"
+                app:layout_constraintTop_toBottomOf="@id/textView_movie_title"
                 app:layout_constraintEnd_toEndOf="parent" />
             <include
-                android:movieId="@+movieId/title"
+                android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mediumMargin"
                 layout="@layout/movie_info_title"
                 app:presenter="@{presenter}"
-                app:layout_constraintStart_toEndOf="@movieId/image_view_movie_poster"
-                app:layout_constraintTop_toBottomOf="@movieId/details"
+                app:layout_constraintStart_toEndOf="@id/image_view_movie_poster"
+                app:layout_constraintTop_toBottomOf="@id/details"
                 app:layout_constraintEnd_toEndOf="parent"/>
             <include
-                android:movieId="@+movieId/overview"
+                android:id="@+id/overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mediumMargin"
                 layout="@layout/movie_info_overview"
                 app:presenter="@{presenter}"
-                app:layout_constraintStart_toEndOf="@movieId/image_view_movie_poster"
-                app:layout_constraintTop_toBottomOf="@movieId/title"
+                app:layout_constraintStart_toEndOf="@id/image_view_movie_poster"
+                app:layout_constraintTop_toBottomOf="@id/title"
                 app:layout_constraintEnd_toEndOf="parent"/>
             <include
-                android:movieId="@+movieId/trailers"
+                android:id="@+id/trailers"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 layout="@layout/movie_info_trailers"
                 app:presenter="@{presenter}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@movieId/image_view_movie_poster"
+                app:layout_constraintTop_toBottomOf="@id/image_view_movie_poster"
                 app:layout_constraintEnd_toEndOf="parent"/>
             <include
-                android:movieId="@+movieId/reviews"
+                android:id="@+id/reviews"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 layout="@layout/movie_info_reviews"
                 app:presenter="@{presenter}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@movieId/trailers"
+                app:layout_constraintTop_toBottomOf="@id/trailers"
                 app:layout_constraintEnd_toEndOf="parent"/>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -91,7 +91,13 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
             for (String _name : names) {
                 initials.append(_name.toUpperCase().toCharArray()[0]);
             }
-            return initials.toString();
+            String result = initials.toString();
+            int length = result.length();
+            if(length >= 3){
+                char[] chars = result.toCharArray();
+                result = String.valueOf(chars[0]) + String.valueOf(chars[length -1]);
+            }
+            return result;
         }
 
         public String getInitials() {

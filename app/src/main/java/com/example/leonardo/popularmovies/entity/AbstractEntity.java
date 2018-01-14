@@ -3,15 +3,15 @@ package com.example.leonardo.popularmovies.entity;
 
 public class AbstractEntity implements BaseEntity {
 
-    private long id;
+    private long databaseId;
 
     @Override
-    public long getId() {
-        return id;
+    public long getDatabaseId() {
+        return databaseId;
     }
 
     @Override
-    public void setId(long id) {
-        this.id = id;
+    public void setDatabaseId(long databaseId) {
+        this.databaseId = databaseId;
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
         <TextView
-            android:movieId="@+movieId/textViewInitials"
+            android:id="@+id/textViewInitials"
             style="@style/textPrimaryLarge"
             android:background="@drawable/bg_circle_medium"
             android:gravity="center"
@@ -21,24 +21,24 @@
             tools:text="LB" />
 
         <TextView
-            android:movieId="@+movieId/textViewName"
+            android:id="@+id/textViewName"
             style="@style/textPrimary"
             android:layout_marginStart="@dimen/mediumMargin"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@movieId/textViewInitials"
+            app:layout_constraintStart_toEndOf="@id/textViewInitials"
             android:text="@{viewHolder.author}"
             tools:text="Leonardo Stabile" />
 
         <TextView
-            android:movieId="@+movieId/textViewContent"
+            android:id="@+id/textViewContent"
             android:layout_width="0dp"
             style="@style/textPrimary"
             android:text="@{viewHolder.content}"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit tincidunt massa movieId rutrum. Cras vel odio euismod, pharetra augue a, vehicula purus. Nam imperdiet lectus sed metus sagittis ultricies. Vestibulum movieId nunc magna. Nam ullamcorper urna movieId quam fringilla vestibulum. Integer consequat turpis vel arcu volutpat tincidunt. Mauris mauris lacus, vulputate non fermentum a, interdum consequat quam. Proin tempor metus eu luctus cursus. Mauris dapibus ultricies augue et dapibus. Nulla et porttitor ipsum, et porttitor dolor. Proin ex urna, condimentum tempus nunc eu, interdum commodo dolor. Donec in maximus elit. In dignissim in ipsum sed dignissim. Praesent vestibulum arcu a consectetur sagittis."
             android:layout_marginStart="@dimen/mediumMargin"
-            app:layout_constraintStart_toEndOf="@movieId/textViewInitials"
+            app:layout_constraintStart_toEndOf="@id/textViewInitials"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@movieId/textViewName"/>
+            app:layout_constraintTop_toBottomOf="@id/textViewName"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

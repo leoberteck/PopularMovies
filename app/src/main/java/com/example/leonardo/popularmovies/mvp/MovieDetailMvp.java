@@ -4,6 +4,7 @@ import android.databinding.Bindable;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.databinding.Observable;
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 
 public interface MovieDetailMvp {
@@ -15,6 +16,7 @@ public interface MovieDetailMvp {
 
     @BindingMethods(value = {
         @BindingMethod(type = RecyclerView.class, attribute = "android:adapter", method = "setAdapter")
+        , @BindingMethod(type = RecyclerView.class, attribute = "android:imageResource", method = "setImageResource")
     })
     interface MovieDetailPresenterInterface extends
         MovieInfoTitle
@@ -23,13 +25,19 @@ public interface MovieDetailMvp {
         , MovieInfoTrailers
         , MovieInfoReviews {
 
-        void setMovie(long movieId, String locale);
+        @DrawableRes
+        @Bindable
+        int getFavoriteIcon();
+
+        void setMovie(long movieId, long databaseId, String locale);
 
         void setMovieDetailActivity(MovieDetailMvp.MovieDetailActivityInterface movieDetailActivity);
 
         void loadReviews(long id, String locale);
 
         void loadTrailers(long id);
+
+        void onFavoriteClick();
     }
 
     interface MovieInfoTitle extends Observable{
@@ -69,5 +77,7 @@ public interface MovieDetailMvp {
         int getReviewsVisibility();
         @Bindable
         int getReviewsErrorVisibility();
+
+        void loadNextReviewsPage();
     }
 }

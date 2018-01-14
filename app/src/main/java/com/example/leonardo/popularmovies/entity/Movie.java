@@ -10,6 +10,7 @@ import java.util.Date;
  */
 
 public class Movie extends AbstractEntity {
+    @SerializedName("id")
     private long movieId;
     private String title;
     @SerializedName("original_title")

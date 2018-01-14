@@ -42,7 +42,7 @@ public class MovieListActivity extends BaseAppCompatActivity implements MovieLis
         AppCompatDelegate.setDefaultNightMode(preferences.getAppThemeDayNightMode());
         ViewDataBinding viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_list);
         if(presenter == null){
-            presenter = new MovieListPresenter(new MovieApi());
+            presenter = new MovieListPresenter(new MovieApi(), getContentResolver());
         }
         viewDataBinding.setVariable(BR.presenter, presenter);
 
@@ -83,9 +83,10 @@ public class MovieListActivity extends BaseAppCompatActivity implements MovieLis
     }
 
     @Override
-    public void onMovieClick(long id) {
+    public void onMovieClick(long movieId, long databaseId) {
         Intent intent = new Intent(MovieListActivity.this, MovieDetailActivity.class);
-        intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA_KEY, id);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID_EXTRA_KEY, movieId);
+        intent.putExtra(MovieDetailActivity.MOVIE_DATABASE_ID_EXTRA_KEY, databaseId);
         startActivity(intent);
     }
 

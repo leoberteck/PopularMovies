@@ -6,21 +6,23 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
-import com.example.leonardo.popularmovies.BR;
 import com.example.leonardo.popularmovies.R;
 import com.example.leonardo.popularmovies.api.MovieApi;
 import com.example.leonardo.popularmovies.api.YoutubeApi;
 import com.example.leonardo.popularmovies.mvp.MovieDetailMvp;
 import com.example.leonardo.popularmovies.mvp.MovieDetailPresenter;
 import com.example.leonardo.popularmovies.utils.ResourceUtils;
+import com.example.leonardo.popularmovies.BR;
 import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends BaseAppCompatActivity implements MovieDetailMvp.MovieDetailActivityInterface {
 
-    public static final String MOVIE_ID_EXTRA_KEY = "MOVIE_ID";
+    public static final String MOVIE_ID_EXTRA_KEY = "MOVIE_ID_EXTRA_KEY";
+    public static final String MOVIE_DATABASE_ID_EXTRA_KEY = "MOVIE_DATABASE_ID_EXTRA_KEY";
     private static final String YOUTUBE_APP_STORE_URL = "market://details?id=com.google.android.youtube";
     private MovieDetailMvp.MovieDetailPresenterInterface presenter;
     private ImageView imageViewMoviePoster;
@@ -40,16 +42,25 @@ public class MovieDetailActivity extends BaseAppCompatActivity implements MovieD
         }
 
         imageViewMoviePoster = findViewById(R.id.image_view_movie_poster);
-        presenter = new MovieDetailPresenter(new MovieApi(), new YoutubeApi(), new ResourceUtils(this));
+        presenter = new MovieDetailPresenter(new MovieApi(), new YoutubeApi(), new ResourceUtils(this), getContentResolver());
         binding.setVariable(BR.presenter, presenter);
 
         Intent intent = getIntent();
+        long movieId = 0;
+        long databaseId = 0;
         if(intent.hasExtra(MOVIE_ID_EXTRA_KEY)){
-            long movieId = intent.getLongExtra(MOVIE_ID_EXTRA_KEY, 0);
-            presenter.setMovie(movieId, getCurrentLanguage());
-            presenter.loadTrailers(movieId);
-            presenter.loadReviews(movieId, getCurrentLanguage());
+            movieId = intent.getLongExtra(MOVIE_ID_EXTRA_KEY, 0);
         }
+        if(intent.hasExtra(MOVIE_DATABASE_ID_EXTRA_KEY)){
+            databaseId = intent.getLongExtra(MOVIE_DATABASE_ID_EXTRA_KEY, 0);
+        }
+        presenter.setMovie(movieId, databaseId, getCurrentLanguage());
+        presenter.loadTrailers(movieId);
+        presenter.loadReviews(movieId, getCurrentLanguage());
+
+        RecyclerView reviewsList = findViewById(R.id.recyclerView_movieReviews);
+        reviewsList.setHasFixedSize(false);
+        reviewsList.addOnScrollListener(bottomScrollListener);
     }
 
     @Override
@@ -75,4 +86,14 @@ public class MovieDetailActivity extends BaseAppCompatActivity implements MovieD
             startActivity(appStoreItent);
         }
     }
+
+    private final RecyclerView.OnScrollListener bottomScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (!recyclerView.canScrollVertically(1)) {
+                presenter.loadNextReviewsPage();
+            }
+        }
+    };
 }

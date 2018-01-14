@@ -2,8 +2,8 @@ package com.example.leonardo.popularmovies.contentProviders;
 
 import android.content.UriMatcher;
 
-import com.example.leonardo.popularmovies.dao.contract.BaseContractEntry;
-import com.example.leonardo.popularmovies.dao.contract.MovieContract;
+import com.example.leonardo.popularmovies.data.contract.BaseContractEntry;
+import com.example.leonardo.popularmovies.data.contract.MovieContract;
 
 public class MovieContentProvider extends AbstractContentProvider {
 

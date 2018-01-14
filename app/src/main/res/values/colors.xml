@@ -8,4 +8,5 @@
     <color name="colorAccent">#FFC107</color>
     <color name="colorIcon">?android:colorControlNormal</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorRed">#f8463d</color>
 </resources>

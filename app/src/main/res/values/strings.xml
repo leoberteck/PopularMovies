@@ -14,6 +14,7 @@
         <item>Upcoming movies</item>
         <item>Movies now playing</item>
         <item>Most popular</item>
+        <item>Favorite movies</item>
     </string-array>
 
     <string-array name="app_theme_values_description">

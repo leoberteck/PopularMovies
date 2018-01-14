@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context="com.example.leonardo.popularmovies.activity.MovieListActivity">
         <android.support.v7.widget.RecyclerView
-            android:movieId="@+movieId/recyclerView_movies"
+            android:id="@+id/recyclerView_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adapter="@{presenter.adapter}"/>

@@ -12,7 +12,7 @@ import com.example.leonardo.popularmovies.enums.MovieSort;
 public interface MovieListMvp {
     interface MovieListActivityInterface extends BaseActivityInterface{
 
-        void onMovieClick(long id);
+        void onMovieClick(long movieId, long databaseId);
     }
 
     @BindingMethods(value = {

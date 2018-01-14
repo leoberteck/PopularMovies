@@ -1,18 +1,25 @@
 package com.example.leonardo.popularmovies.mvp;
 
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.leonardo.popularmovies.BR;
 import com.example.leonardo.popularmovies.R;
 import com.example.leonardo.popularmovies.adapters.MovieGridAdapter;
 import com.example.leonardo.popularmovies.api.MovieAPIInterface;
+import com.example.leonardo.popularmovies.data.contract.MovieContract;
+import com.example.leonardo.popularmovies.data.dao.AbstractDaoInterface;
+import com.example.leonardo.popularmovies.data.dao.MovieDao;
 import com.example.leonardo.popularmovies.entity.Movie;
 import com.example.leonardo.popularmovies.entity.MoviePaginatedResult;
 import com.example.leonardo.popularmovies.enums.MovieSort;
+import com.example.leonardo.popularmovies.BR;
+import java.util.List;
 
 import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListActivityInterface;
 import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListPresenterInterface;
@@ -21,11 +28,33 @@ import static com.example.leonardo.popularmovies.mvp.MovieListMvp.MovieListPrese
 public class MovieListPresenter extends BaseObservable implements MovieListPresenterInterface, MovieGridAdapter.ItemClickListener {
 
     private MovieGridAdapter adapter;
+    @NonNull
     private final MovieAPIInterface movieApi;
+    @NonNull
+    private final ContentResolver contentResolver;
+    private final MovieDao movieDao;
     private MovieListActivityInterface movieListActivityInterface;
 
-    public MovieListPresenter(MovieAPIInterface movieApi) {
+    public MovieListPresenter(@NonNull MovieAPIInterface movieApi, @NonNull ContentResolver contentResolver) {
         this.movieApi = movieApi;
+        this.contentResolver = contentResolver;
+        movieDao = new MovieDao(contentResolver);
+
+        //Register a ContentObserver for the Movie Content Uri, so that the view knows
+        // when the user unfavorite a movie and then remove it from the list.
+        this.contentResolver.registerContentObserver(
+            MovieContract.MovieEntry.getInstance().getContentUri()
+            , false
+            , new ContentObserver(new Handler()) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    super.onChange(selfChange);
+                    if(getAdapter().getMovieSort() == MovieSort.FAVORITES){
+                        changeSort(getAdapter().getMovieSort(), getAdapter().getLocale());
+                    }
+                }
+            }
+        );
     }
 
     @Bindable
@@ -48,17 +77,31 @@ public class MovieListPresenter extends BaseObservable implements MovieListPrese
     @Override
     public void loadNextPage(){
         if(getAdapter().getCurrentPage() < getAdapter().getTotalPages() || getAdapter().getCurrentPage() == 0){
-            new MovieQueryTask(this, movieApi).run(
-                getAdapter().getMovieSort()
-                , getAdapter().getCurrentPage() + 1
-                , getAdapter().getLocale()
-            );
+            if(getAdapter().getMovieSort() == MovieSort.FAVORITES){
+                movieDao.query(new AbstractDaoInterface.OnTaskFinishListener<List<Movie>>() {
+                    @Override
+                    public void onTaskFinish(Exception ex, List<Movie> result) {
+                        MoviePaginatedResult onePageResult = new MoviePaginatedResult();
+                        onePageResult.setPage(1);
+                        onePageResult.setResults(result);
+                        onePageResult.setTotalPages(1);
+                        onePageResult.setTotalResults(result != null ? result.size() : 0);
+                        getAdapter().addPage(onePageResult);
+                    }
+                });
+            }else{
+                new MovieQueryTask(this, movieApi).run(
+                        getAdapter().getMovieSort()
+                        , getAdapter().getCurrentPage() + 1
+                        , getAdapter().getLocale()
+                );
+            }
         }
     }
 
     @Override
     public void onItemClick(Movie movie) {
-        movieListActivityInterface.onMovieClick(movie.getMovieId());
+        movieListActivityInterface.onMovieClick(movie.getMovieId(), movie.getDatabaseId());
     }
 
     @Override

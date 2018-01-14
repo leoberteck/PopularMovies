@@ -1,10 +1,10 @@
-package com.example.leonardo.popularmovies.dao;
+package com.example.leonardo.popularmovies.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.leonardo.popularmovies.dao.contract.MovieContract;
+import com.example.leonardo.popularmovies.data.contract.MovieContract;
 
 
 public class DbHelper extends SQLiteOpenHelper {

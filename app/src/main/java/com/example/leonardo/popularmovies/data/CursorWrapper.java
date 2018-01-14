@@ -1,4 +1,4 @@
-package com.example.leonardo.popularmovies.dao;
+package com.example.leonardo.popularmovies.data;
 
 import android.content.ContentResolver;
 import android.database.CharArrayBuffer;
@@ -277,7 +277,7 @@ public class CursorWrapper implements Cursor {
     }
 
     private Integer getIndex(String s){
-        if(indexCache.containsKey(s)){
+        if(!indexCache.containsKey(s)){
             indexCache.put(s, getColumnIndex(s));
         }
         return indexCache.get(s);

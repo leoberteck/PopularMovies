@@ -15,7 +15,7 @@
             android:text="@string/videos"/>
         <android.support.v7.widget.RecyclerView
             android:visibility="@{presenter.trailersVisibility}"
-            android:movieId="@+movieId/recyclerView_movieTrailers"
+            android:id="@+id/recyclerView_movieTrailers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"

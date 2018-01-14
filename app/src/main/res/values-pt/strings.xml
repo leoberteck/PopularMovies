@@ -15,6 +15,7 @@
         <item>A serem lançados</item>
         <item>Nos cinemas</item>
         <item>Mais populares</item>
+        <item>Filmes favoritos</item>
     </string-array>
     <string name="release_date">Data de lançamento</string>
     <string name="duration">Duração</string>

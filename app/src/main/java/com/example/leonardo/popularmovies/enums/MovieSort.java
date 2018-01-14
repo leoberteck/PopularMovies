@@ -5,7 +5,8 @@ public enum MovieSort {
     TOP_RATED(1)
     , UPCOMING(2)
     , NOW_PLAYING(3)
-    , POPULAR(4);
+    , POPULAR(4)
+    , FAVORITES(5);
 
     private final int value;
 
@@ -32,6 +33,10 @@ public enum MovieSort {
                 break;
             case 4:
                 sort = POPULAR;
+                break;
+            case 5:
+                sort = FAVORITES;
+                break;
         }
         return sort;
     }

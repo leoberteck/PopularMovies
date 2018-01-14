@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <ImageView
-        android:movieId="@+movieId/imageView_trailer_thumb"
+        android:id="@+id/imageView_trailer_thumb"
         android:layout_width="@dimen/trailer_width"
         android:layout_height="@dimen/trailer_height"
         android:contentDescription="@string/trailer_thumbnail" />

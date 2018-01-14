@@ -11,8 +11,8 @@ import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.leonardo.popularmovies.dao.DbHelper;
-import com.example.leonardo.popularmovies.dao.contract.BaseContractEntry;
+import com.example.leonardo.popularmovies.data.DbHelper;
+import com.example.leonardo.popularmovies.data.contract.BaseContractEntry;
 
 
 public abstract class AbstractContentProvider extends ContentProvider {
@@ -90,6 +90,7 @@ public abstract class AbstractContentProvider extends ContentProvider {
                 selectionArgs = new String[]{id};
             }
             tasksDeleted =  db.delete(getContractEntry().getTableName(), selection, selectionArgs);
+            getContext().getContentResolver().notifyChange(getContractEntry().getContentUri(), null);
         } else {
             throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -111,6 +112,7 @@ public abstract class AbstractContentProvider extends ContentProvider {
                 selectionArgs = new String[]{id};
             }
             tasksUpdated =  db.update(getContractEntry().getTableName(), contentValues, selection, selectionArgs);
+            getContext().getContentResolver().notifyChange(getContractEntry().getContentUri(), null);
         } else {
             throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

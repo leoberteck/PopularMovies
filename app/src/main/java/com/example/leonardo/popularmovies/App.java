@@ -1,8 +1,8 @@
 package com.example.leonardo.popularmovies;
 
 import android.app.Application;
-
-import com.example.leonardo.popularmovies.dao.DbHelper;
+import android.content.Context;
+import android.net.ConnectivityManager;
 
 public class App extends Application {
 
@@ -12,16 +12,14 @@ public class App extends Application {
         return instance;
     }
 
-    private DbHelper dbHelper;
-
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        dbHelper = new DbHelper(this);
     }
 
-    public DbHelper getDbHelper() {
-        return dbHelper;
+    public boolean isNetworkAvailable() {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

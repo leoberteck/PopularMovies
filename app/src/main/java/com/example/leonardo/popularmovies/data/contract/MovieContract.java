@@ -1,9 +1,9 @@
-package com.example.leonardo.popularmovies.dao.contract;
+package com.example.leonardo.popularmovies.data.contract;
 
 import android.content.ContentValues;
 import android.net.Uri;
 
-import com.example.leonardo.popularmovies.dao.CursorWrapper;
+import com.example.leonardo.popularmovies.data.CursorWrapper;
 import com.example.leonardo.popularmovies.entity.Movie;
 
 import java.util.Calendar;
@@ -17,16 +17,16 @@ public class MovieContract {
 
     public static class MovieEntry implements BaseContractEntry<Movie> {
 
-        private static final Uri contentUri = baseUri.buildUpon().appendPath(MOVIE_PATH).build();
-        private static final String MOVIE_ID = "MOVIE_ID";
-        private static final String TITLE = "TITLE";
-        private static final String ORIGINAL_TITLE = "ORIGINAL_TITLE";
-        private static final String POSTER_PATH = "POSTER_PATH";
-        private static final String ORIGINAL_LANGUAGE = "ORIGINAL_LANGUAGE";
-        private static final String OVERVIEW = "OVERVIEW";
-        private static final String RELEASE_DATE = "RELEASE_DATE";
-        private static final String RUNTIME = "RUNTIME";
-        private static final String VOTE_AVERAGE = "VOTE_AVERAGE";
+        public static final Uri contentUri = baseUri.buildUpon().appendPath(MOVIE_PATH).build();
+        public static final String MOVIE_ID = "MOVIE_ID";
+        public static final String TITLE = "TITLE";
+        public static final String ORIGINAL_TITLE = "ORIGINAL_TITLE";
+        public static final String POSTER_PATH = "POSTER_PATH";
+        public static final String ORIGINAL_LANGUAGE = "ORIGINAL_LANGUAGE";
+        public static final String OVERVIEW = "OVERVIEW";
+        public static final String RELEASE_DATE = "RELEASE_DATE";
+        public static final String RUNTIME = "RUNTIME";
+        public static final String VOTE_AVERAGE = "VOTE_AVERAGE";
 
         private static final String[] columns = new String[]{
             _ID
@@ -55,8 +55,9 @@ public class MovieContract {
             Movie entity = null;
             if(cursor.moveToPosition(position)){
                 entity = new Movie();
-                entity.setId(cursor.getLong(_ID, 0L));
+                entity.setDatabaseId(cursor.getLong(_ID, 0L));
                 entity.setMovieId(cursor.getLong(MOVIE_ID, 0L));
+                entity.setTitle(cursor.getString(TITLE, null));
                 entity.setOriginalTitle(cursor.getString(ORIGINAL_TITLE, null));
                 entity.setPosterPath(cursor.getString(POSTER_PATH, null));
                 entity.setOriginalLanguage(cursor.getString(ORIGINAL_LANGUAGE, null));
@@ -71,7 +72,7 @@ public class MovieContract {
         @Override
         public ContentValues serialize(Movie entity) {
             ContentValues values = new ContentValues();
-            values.put(_ID, entity.getId());
+            //values.put(_ID, entity.getDatabaseId());
             values.put(MOVIE_ID, entity.getMovieId());
             values.put(TITLE, entity.getTitle());
             values.put(ORIGINAL_TITLE, entity.getOriginalTitle());
@@ -101,7 +102,7 @@ public class MovieContract {
 
         public String getCreateTable(){
             return "CREATE TABLE " + getTableName() + " ("
-                + _ID + " INTEGER PRIMARY KEY, "
+                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MOVIE_ID + " INTEGER NOT NULL UNIQUE, "
                 + TITLE + " TEXT, "
                 + ORIGINAL_TITLE + " TEXT, "
